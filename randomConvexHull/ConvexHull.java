@@ -15,12 +15,25 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.geometry.Point2D;
 import javafx.beans.property.IntegerProperty;
+/**
+ * The ConvexHull class extends the Application class from JavaFX.
+ * It is used to create a visual representation of a convex hull algorithm.
+ * The algorithm sorts each point of a point array into a quadrant, then starts in the 3rd quadrant and chooses the next point based on the angle.
+ */
 public class ConvexHull extends Application
 {
-	int seed = 0;
-	void addSeed() {
-		seed++;
-	}
+ /**
+  * The seed variable is used to seed the random number generator.
+  * Changing the seed will result in a different set of random numbers being generated.
+  */
+ int seed = 0;
+ /**
+  * The addSeed method is used to increment the seed variable.
+  * This is used to change the seed for the random number generator.
+  */
+ void addSeed() {
+ 		seed++;
+ 	}
 	@Override
 	public void start(Stage stage) 
 	{
@@ -74,25 +87,29 @@ public class ConvexHull extends Application
 		    	Point2D top = left;
 		    	Point2D right = left;
 		    	Point2D bottom = left;
-		    	for (int i = 0; i < dots.size(); i++) 
-		    	{
-		    		if (dots.get(i).getX() < left.getX()) 
-		    		{
-		    			left = dots.get(i);
-		    		}
-		    		if (dots.get(i).getX() > right.getX()) 
-		    		{
-		    			right = dots.get(i);
-		    		}
-		    		if (dots.get(i).getY() < bottom.getY()) 
-		    		{
-		    			bottom = dots.get(i);
-		    		}
-		    		if (dots.get(i).getY() > top.getY()) 
-		    		{
-		    			top = dots.get(i);
-		    		}
-		    	}
+       /**
+        * This loop is used to find the leftmost, rightmost, topmost, and bottommost points in the dots array.
+        * These points are used to define the boundaries of the convex hull.
+        */
+       for (int i = 0; i < dots.size(); i++) 
+       		    	{
+       		    		if (dots.get(i).getX() < left.getX()) 
+       		    		{
+       		    			left = dots.get(i);
+       		    		}
+       		    		if (dots.get(i).getX() > right.getX()) 
+       		    		{
+       		    			right = dots.get(i);
+       		    		}
+       		    		if (dots.get(i).getY() < bottom.getY()) 
+       		    		{
+       		    			bottom = dots.get(i);
+       		    		}
+       		    		if (dots.get(i).getY() > top.getY()) 
+       		    		{
+       		    			top = dots.get(i);
+       		    		}
+       		    	}
 		    	
 		    double m1 = (left.getY()-top.getY())/(left.getX()-top.getX());
 		    double b1 = left.getY();
@@ -228,8 +245,12 @@ public class ConvexHull extends Application
 	    		}
 	    	});
 	}
-	public static void main(String[] args) 
-	{
-		launch(args);
-	}	
+ /**
+  * The main method is the entry point of the application.
+  * It calls the launch method from the Application class to start the JavaFX application.
+  */
+ public static void main(String[] args) 
+ 	{
+ 		launch(args);
+ 	}	
 }
