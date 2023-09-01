@@ -1,3 +1,5 @@
+// This class is used to create a convex hull using a custom algorithm.
+// The algorithm sorts each point of a point array into a quadrant, then starts in the 3rd quadrant and chooses the next point based on the angle.
 package randomConvexHull;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,16 +19,21 @@ import javafx.geometry.Point2D;
 import javafx.beans.property.IntegerProperty;
 public class ConvexHull extends Application
 {
-	int seed = 0;
-	void addSeed() {
-		seed++;
-	}
-	@Override
-	public void start(Stage stage) 
-	{
-		int width = 850;
-		int height = 850;
-		int dotCount = 10;
+ // This variable is used as the seed for the random number generator.
+ int seed = 0;
+ // This method is used to increment the seed value by 1.
+ void addSeed() {
+ 		seed++;
+ 	}
+ // This method is the entry point for the JavaFX application.
+ // It sets up the stage and scene, and handles the mouse pressed event to generate the convex hull.
+ @Override
+ 	public void start(Stage stage) 
+ 	{
+  // These variables define the width and height of the scene, and the number of points to generate.
+  int width = 850;
+  		int height = 850;
+  		int dotCount = 10;
 		Group root = new Group();
 	    	Scene s = new Scene(root, width, height, Color.BLACK);
 	    	final Canvas canvas = new Canvas(width, height);
@@ -40,8 +47,9 @@ public class ConvexHull extends Application
 	    	canvas.setFocusTraversable(true);
 	    	canvas.setOnMousePressed(e -> 
 	    	{
-	    		for (int n = 0; n < 1; n++) {
-	    		long start = System.nanoTime();
+       // This loop runs once and measures the time taken to generate the convex hull.
+       for (int n = 0; n < 1; n++) {
+       	    		long start = System.nanoTime();
 		    	Random rnd = new Random();
 		    	addSeed();
 		    	rnd.setSeed(seed);
@@ -133,11 +141,13 @@ public class ConvexHull extends Application
 //		    			gc.strokeLine(p.getX(), p.getY(), t.getX(), t.getY());
 //		    		}
 		    	}
-		    	while (true)
-		    	{
-		    		int amount = 0;
-		    		double angle = -1000;
-		    		Point2D savePoint = pnt;
+       // This loop continues until there are no more points to consider for the convex hull.
+       // It finds the point with the largest angle and adds it to the convex hull.
+       while (true)
+       		    	{
+       		    		int amount = 0;
+       		    		double angle = -1000;
+       		    		Point2D savePoint = pnt;
 			    	for (Point2D p : dots) 
 			    	{
 			    		if (p==r1)
@@ -228,8 +238,9 @@ public class ConvexHull extends Application
 	    		}
 	    	});
 	}
-	public static void main(String[] args) 
-	{
-		launch(args);
-	}	
+ // This is the main method that launches the JavaFX application.
+ public static void main(String[] args) 
+ 	{
+ 		launch(args);
+ 	}	
 }
